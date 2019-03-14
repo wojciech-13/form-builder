@@ -4,12 +4,15 @@ import "./FormComponent.css"
 function FormComponent(props){
 
     const conditionDisplay = props.condition ? "inline-block" : "none";
+
     return (
         <div className="formContainer">
 
+            <div style={{display: conditionDisplay}}>
             <label> <span className="span">Condition</span>
-                <select style={{display: conditionDisplay}} className="inputs" ></select>
+                <select className="inputs" ></select>
             </label>
+            </div>
 
             <label> <span className="span">Question</span>
                 <input className="inputs" type="text"/>

@@ -6,20 +6,26 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      forms: {id: ""}
+      forms: []
     }
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
 
+
+  handleClick() {
+    this.setState(prevState => {
+      prevState.forms.push({type: "something"});
+      return {forms: prevState.forms}
+    })
   }
 
   render() {
+    const formss = this.state.forms.map(form => <FormComponent {...form}/>)
     return (
       <div className="App">
           <h1> Form Builder </h1>
-          <FormComponent condition="something"/>
+          {formss}
           <button onClick={this.handleClick} className="addInput">Add Input</button>
       </div>
     );
