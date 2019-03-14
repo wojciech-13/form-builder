@@ -27,7 +27,7 @@ function FormComponent(props){
             </label>
 
             <div className="buttonsContainer">
-                <button>Add Sub-Input</button>
+                <button name="addSubInput" onClick={props.handleClick}>Add Sub-Input</button>
                 <button>Delete</button>
             </div>
 
