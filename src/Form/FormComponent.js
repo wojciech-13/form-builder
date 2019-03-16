@@ -1,21 +1,21 @@
 import React from 'react';
-import "./FormComponent.css"
+import "./FormStyles.css"
+
 
 function FormComponent(props){
 
-    const conditionDisplay = props.condition ? "inline-block" : "none";
 
     return (
         <div className="formContainer">
 
-            <div style={{display: conditionDisplay}}>
+            <div>
             <label> <span className="span">Condition</span>
                 <select className="inputs" ></select>
             </label>
             </div>
 
             <label> <span className="span">Question</span>
-                <input className="inputs" type="text"/>
+                <input name="question" className="inputs" type="text"/>
             </label>
 
             <label> <span className="span">Type </span>
@@ -27,7 +27,7 @@ function FormComponent(props){
             </label>
 
             <div className="buttonsContainer">
-                <button name="addSubInput" onClick={props.handleClick}>Add Sub-Input</button>
+                <button name="addSubInput">Add Sub-Input</button>
                 <button>Delete</button>
             </div>
 
