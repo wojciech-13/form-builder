@@ -19,7 +19,7 @@ class FormComponent extends React.Component {
             return   (
                 {
                 ...prevState,
-                subForms: [...prevState.subForms, {id: uniqueId(), }]
+                subForms: [...prevState.subForms, {id: uniqueId(), isSubForm: true}]
                 }
             );
         });
@@ -31,17 +31,18 @@ class FormComponent extends React.Component {
                 <FormComponent
                     key={subForm.id}
                     id={subForm.id}
-
+                    isSubForm = {subForm.isSubForm}
                 />
             )
         })
         const {removeForm, id} = this.props;
+        const displayCondition = { display: this.props.isSubForm ? "block" : "none" }
 
         return (
             <div>
                 <div className="formContainer">
                     id = {id}  {/*  pomocnicze id*/}
-                    <div>
+                    <div style = { displayCondition }>
                     <label> <span className="span">Condition</span>
                         <select className="inputs" ></select>
                     </label>
