@@ -19,55 +19,56 @@ class FormComponent extends React.Component {
             return   (
                 {
                 ...prevState,
-                subForms: [...prevState.subForms, {id: uniqueId()}]
+                subForms: [...prevState.subForms, {id: uniqueId(), }]
                 }
             );
         });
     }
 
     render() {
-
         const subForms = this.state.subForms.map(subForm => {
             return (
                 <FormComponent
                     key={subForm.id}
                     id={subForm.id}
+
                 />
             )
         })
+        const {removeForm, id} = this.props;
 
         return (
-            <>
-            <div className="formContainer">
-                id = {this.props.id}  {/*  pomocnicze id*/}
-                <div>
-                <label> <span className="span">Condition</span>
-                    <select className="inputs" ></select>
-                </label>
+            <div>
+                <div className="formContainer">
+                    id = {id}  {/*  pomocnicze id*/}
+                    <div>
+                    <label> <span className="span">Condition</span>
+                        <select className="inputs" ></select>
+                    </label>
+                    </div>
+
+                    <label> <span className="span">Question</span>
+                        <input name="question" className="inputs" type="text"/>
+                    </label>
+
+                    <label> <span className="span">Type </span>
+                        <select className="inputs">
+                            <option>Yes / No</option>
+                            <option>Text</option>
+                            <option>Number</option>
+                        </select>
+                    </label>
+
+                    <div className="buttonsContainer">
+                        <button onClick={this.addSubForms}>Add Sub-Form</button>
+                        <button onClick={() => removeForm(id)}>Delete</button>
+                    </div>
                 </div>
 
-                <label> <span className="span">Question</span>
-                    <input name="question" className="inputs" type="text"/>
-                </label>
-
-                <label> <span className="span">Type </span>
-                    <select className="inputs">
-                        <option>Yes / No</option>
-                        <option>Text</option>
-                        <option>Number</option>
-                    </select>
-                </label>
-
-                <div className="buttonsContainer">
-                    <button onClick={this.addSubForms}>Add Sub-Form</button>
-                    <button>Delete</button>
+                <div className="subFormContainer">
+                {subForms}
                 </div>
-                
             </div>
-            <div className="subFormContainer">
-            {subForms}
-            </div>
-            </>
 
         );
     }

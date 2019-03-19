@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import FormContainer from './Form/FormContainer.js';
 
 function App() {
