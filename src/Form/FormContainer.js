@@ -3,6 +3,22 @@ import FormComponent from './FormComponent.js';
 import uniqueId from "lodash/uniqueId";
 import "./FormStyles.css"
 
+function mapForms(forms, id, values){
+    return (
+        forms.map(form => {
+            if (form.id === id){
+                return {...form, ...values};
+            }
+            else if (form.subForms) {
+                return { ...form, subForms: mapForms(form.subForms, id, values)};
+            }
+            else {
+                return form;
+            }
+        })
+    );
+}
+
 function filterForms(forms, id) {
     return (
     forms.filter(form => {
@@ -17,7 +33,7 @@ function filterForms(forms, id) {
         }
         return false;
     })
-    )
+    );
 }
 
 
@@ -30,12 +46,17 @@ class FormContainer extends React.Component {
         };
         this.addForm = this.addForm.bind(this);
         this.removeForm = this.removeForm.bind(this);
+        this.updateForm = this.updateForm.bind(this);
     }
 
     addForm() {
         this.setState(prevState => ({
             forms: [...prevState.forms, { id: uniqueId() }]
-        }))
+        }), 
+        ()=> {
+            console.log(this.state.forms);
+        })
+        
     }
 
     removeForm(id) {
@@ -48,12 +69,18 @@ class FormContainer extends React.Component {
         });
     }
 
+    updateForm(id, values) {
+        this.setState(prevState => ({
+            forms: mapForms(prevState.forms, id, values)
+        }))
+    }
     render(){
         const formComponents = this.state.forms.map(form => (
             <FormComponent
                 key = {form.id}
                 id = {form.id}
                 removeForm = {this.removeForm}
+                updateForm = {this.updateForm}
             />
         ))
         return(

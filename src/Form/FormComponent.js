@@ -15,28 +15,34 @@ class FormComponent extends React.Component {
     }
 
     addSubForms() {
-        this.setState(prevState => {
-            return   (
-                {
-                ...prevState,
-                subForms: [...prevState.subForms, {id: uniqueId(), isSubForm: true}]
-                }
-            );
-        });
+        const {updateForm, id} = this.props;
+        this.setState(prevState => (
+            {
+            ...prevState,
+            subForms: [...prevState.subForms, {id: uniqueId(), isSubForm: true}]
+            }),
+            () => {
+                updateForm(id, {subForms: this.state.subForms});
+                console.log(this.state.subForms);
+            }
+        );
     }
 
     render() {
+        const {updateForm, removeForm, id} = this.props;
+        const displayCondition = { display: this.props.isSubForm ? "block" : "none" }
+        
         const subForms = this.state.subForms.map(subForm => {
             return (
                 <FormComponent
                     key={subForm.id}
                     id={subForm.id}
+                    updateForm = {updateForm}
+                    removeForm = {removeForm}
                     isSubForm = {subForm.isSubForm}
                 />
             )
-        })
-        const {removeForm, id} = this.props;
-        const displayCondition = { display: this.props.isSubForm ? "block" : "none" }
+        });
 
         return (
             <div>
