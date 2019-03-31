@@ -21,18 +21,19 @@ function mapForms(forms, id, values){
 
 function filterForms(forms, id) {
     return (
-    forms.filter(form => {
-        if(form.id === id) {
+        forms.filter(form => {
+            if(form.id === id) {
+                return false;
+            }
+            if(form.subForms) {
+                filterForms(form.subForms, id)
+                return true;
+            }
+            if(form.id !== id) {
+                return true;
+            }
             return false;
-        }
-        // if(form.subForms) {
-        //     return { ...form, subInputs: filterForms(form.subInputs, id) };
-        // }
-        if(form.id !== id) {
-            return true;
-        }
-        return false;
-    })
+        })
     );
 }
 
@@ -60,13 +61,10 @@ class FormContainer extends React.Component {
     }
 
     removeForm(id) {
-        this.setState(prevState => {
-            return (
-                {
-                    forms: filterForms(prevState.forms, id)
-                }
-            );
-        });
+        this.setState(prevState => ({
+                forms: filterForms(prevState.forms, id)
+            }
+        ));
     }
 
     updateForm(id, values) {
@@ -83,6 +81,7 @@ class FormContainer extends React.Component {
                 updateForm = {this.updateForm}
             />
         ))
+        
         return(
             <div>
                 <button className="addForm" onClick={this.addForm}> Add Form </button>
