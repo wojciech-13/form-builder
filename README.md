@@ -2,7 +2,7 @@
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/en/)
-- [yarn](https://yarnpkg.com/lang/en/)
+- [Yarn](https://yarnpkg.com/lang/en/)
 
 ### Installation 
 
