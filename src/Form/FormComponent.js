@@ -17,8 +17,6 @@ class FormComponent extends React.Component {
         this.setState({
             type: e.target.value
         })
-        
-        console.log(this.state.type1);
     }
     addSubForms() {
         const {updateForm, id} = this.props;
@@ -50,49 +48,48 @@ class FormComponent extends React.Component {
         });
         const selectForRadioType = 
         <>
-            <select className="inputs">
+            <select className="conditionInput1">
                 <option>Equals</option>
             </select>
-            <select style = {{display: "inline-block"}}>
+            <select className="conditionInput3" >
                 <option>Yes</option>
                 <option>No</option>
             </select>
         </>
         const selectForTextType = 
         <>
-            <select className="inputs">
+            <select className="conditionInput1">
                 <option>Equals</option>
             </select>
-            <input style={{display: "inline-block", width: "100px"}} type="text"></input>
+            <input className="conditionInput2" type="text"></input>
         </>
         const selectForNumberType = 
         <>
-            <select className="inputs">
+            <select className="conditionInput1">
                 <option>Equals</option>
                 <option>Greater Than</option>
                 <option>Less Than</option>
             </select>
-            <input style={{display: "inline-block"}} type="text"></input>
+            <input className="conditionInput2" type="text"></input>
         </>
-        
 
         return (
             <div>
                 <div className="formContainer">
                     <div style = { displayCondition }>
-                    <label> <span className="span">Condition</span>
-                        {type === "Yes / No" ? selectForRadioType : null}
-                        {type === "Number" ? selectForNumberType : null}
-                        {type === "Text" ? selectForTextType : null}
-                    </label>
+                        <label> <span  className="span">Condition</span>
+                            {type === "Yes / No" ? selectForRadioType : null}
+                            {type === "Number" ? selectForNumberType : null}
+                            {type === "Text" ? selectForTextType : null}
+                        </label>
                     </div>
 
-                    <label> <span className="span">Question</span>
-                        <input name="question" className="inputs" type="text"/>
+                    <label > <span className="span">Question</span>
+                        <input className="questionInput" name="question" type="text"/>
                     </label>
 
                     <label> <span className="span">Type </span>
-                        <select onChange={this.handleChange} className="inputs">
+                        <select onChange={this.handleChange} className="typeInput">
                             <option name="radio">Yes / No</option>
                             <option name="text">Text</option>
                             <option name="number">Number</option>

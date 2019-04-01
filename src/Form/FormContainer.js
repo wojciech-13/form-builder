@@ -53,11 +53,7 @@ class FormContainer extends React.Component {
     addForm() {
         this.setState(prevState => ({
             forms: [...prevState.forms, { id: uniqueId() }]
-        }), 
-        ()=> {
-            console.log(this.state.forms);
-        })
-        
+        }))
     }
 
     removeForm(id) {
